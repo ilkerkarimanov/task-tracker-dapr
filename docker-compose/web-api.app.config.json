@@ -1,0 +1,7 @@
+{
+    "databaseHost": "host.docker.internal",
+    "databasePort": "3306",
+    "databaseName": "test",
+    "databaseUsr": "root",
+    "databasePwd": "root"
+}

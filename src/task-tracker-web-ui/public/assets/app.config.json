@@ -1,0 +1,4 @@
+﻿{
+  "daprSidecarUrl": "localhost:3500",
+  "daprApiId": "task-tracker-web-api"
+}

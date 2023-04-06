@@ -1,0 +1,46 @@
+version: "3.9"
+name: task-tracker-rjs-net
+services:
+  frontend:
+    environment:
+      API_URL: http://localhost:3500/api
+    build:
+      context: ../src/task-tracker-web-ui
+    volumes:
+      - ./templates:/etc/nginx/templates
+    ports:
+      - "3000:80"
+      - "3500:3500"
+  frontend-dapr:
+    image: "daprio/daprd:1.9.4"
+    command: [ "./daprd",
+               "-app-id", "task-tracker-web-ui",
+               "-app-port", "80",
+               "-app-protocol", "http",
+               "-dapr-http-port", "3500"
+    ]
+    network_mode: "service:frontend"
+    depends_on:
+      - frontend
+  backend:
+    build:
+      context: ../src/task-tracker-web-api
+    ports:
+      - "5254:80"
+      - "3501:3501"
+  backend-dapr:
+    image: "daprio/daprd:1.9.4"
+    command: [ "./daprd",
+               "-app-id", "task-tracker-web-api",
+               "-app-port", "80",
+               "-app-protocol", "http",
+               "-dapr-http-port", "3501"
+    ]
+    network_mode: "service:backend"
+    depends_on:
+      - backend
+  dapr-placement:
+    image: "daprio/dapr:1.9.4"
+    command: [ "./placement", "-port", "50000", "-log-level", "debug" ]
+    ports:
+      - "50000:50000"

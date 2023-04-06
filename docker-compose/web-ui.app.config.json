@@ -1,0 +1,5 @@
+{
+    "defaultApiUrl": "http://localhost:3000/api",
+    "daprApiUrl": "http://localhost:3501/api",
+    "daprAppId": "tasks-nest-web-app"
+}
