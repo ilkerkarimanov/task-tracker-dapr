@@ -29,7 +29,7 @@
     "http:dapr": {
       "commandName": "Executable",
       "executablePath": "pwsh",
-      "commandLineArgs": "-Command \"dapr run --app-port 5254 --app-id task-tracker-web-api --app-protocol http --dapr-http-port 3501\"",
+      "commandLineArgs": "-Command \"dapr run --app-port 5254 --app-id task-tracker-web-api --app-protocol http --dapr-http-port 3502\"",
       "workingDirectory": ".",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

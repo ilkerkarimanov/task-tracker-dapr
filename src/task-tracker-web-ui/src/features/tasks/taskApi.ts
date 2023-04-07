@@ -6,6 +6,7 @@ import axios from "axios";
 import * as TaskApiMapper from "./taskApiMapper";
 import * as appConfig from "../config/appConfig";
 import {AppConfigModel} from "../config/appConfig.model";
+import app from "../../app";
 
 export default class TaskAPI {
 
@@ -41,7 +42,10 @@ export default class TaskAPI {
             try {
                 const appConfig = TaskAPI.getAppConfig();
                 const serviceMethod = "api/tasks";
-                const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}/${taskId}`;
+                
+                //const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}/${taskId}`;
+                
+                const url =`http://${appConfig.webApiGwUrl}/task-api-dapr/${serviceMethod}/${taskId}`;
                 const response = await axios.get<any[]>(url);
                 const data = TaskApiMapper.createTaskResponse(response.data);
                 resolve(data);
@@ -57,7 +61,11 @@ export default class TaskAPI {
             try {
                 const appConfig = TaskAPI.getAppConfig();
                 const serviceMethod = "api/tasks";
-                const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}`;
+                
+                // const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}`;
+
+                const url =`http://${appConfig.webApiGwUrl}/task-api-dapr/${serviceMethod}`;
+
                 const response = await axios.get<any[]>(url);
                 const data = response.data.map((resp: any) => TaskApiMapper.createTaskResponse(resp));
                 resolve(data);
@@ -73,7 +81,11 @@ export default class TaskAPI {
             try {
                 const appConfig = TaskAPI.getAppConfig();
                 const serviceMethod = "api/tasks";
-                const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}`;
+                
+                //const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}`;
+
+                const url =`http://${appConfig.webApiGwUrl}/task-api-dapr/${serviceMethod}`;
+
                 await axios.post(url, TaskApiMapper.createAddTaskRequest(task));
                 resolve();
             } catch (error) {
@@ -88,7 +100,11 @@ export default class TaskAPI {
             try {
                 const appConfig = TaskAPI.getAppConfig();
                 const serviceMethod = "api/tasks";
-                const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}`;
+                
+                //const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}`;
+
+                const url =`http://${appConfig.webApiGwUrl}/task-api-dapr/${serviceMethod}`;
+
                 await axios.put(
                     url,
                     TaskApiMapper.createEditTaskRequest(task)
@@ -104,10 +120,13 @@ export default class TaskAPI {
     static async listTasksByAssignee(userName: string): Promise<TaskModel[]> {
         return new Promise<TaskModel[]>(async (resolve) => {
             try {
-                console.log(userName);
                 const appConfig = TaskAPI.getAppConfig();
                 const serviceMethod = "api/tasksbyassignee";
-                const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}/${userName}`;
+                
+                //const url = `http://${appConfig.daprSidecarUrl}/v1.0/invoke/${appConfig.daprApiId}/method/${serviceMethod}/${userName}`;
+
+                const url =`http://${appConfig.webApiGwUrl}/task-api-dapr/${serviceMethod}/${userName}`;
+
                 const response = await axios.get<any[]>(url);
                 const data = response.data.map((resp: any) => TaskApiMapper.createTaskResponse(resp));
                 resolve(data);

@@ -1,5 +1,7 @@
 {
-    "defaultApiUrl": "http://localhost:3000/api",
-    "daprApiUrl": "http://localhost:3501/api",
-    "daprAppId": "tasks-nest-web-app"
+    "_comment": "apiMode - 'frontend-dapr', 'gw-task-api-dapr', 'gw-task-api-direct'",
+    "apiMode": "gw-task-api-dapr", 
+    "webApiGwUrl": "localhost:8080",
+    "daprSidecarUrl": "localhost:3500",
+    "daprApiId": "task-tracker-web-api"
 }

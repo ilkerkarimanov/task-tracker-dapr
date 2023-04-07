@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:dapr": "dapr run --app-port 3000 --app-id task-tracker-web-ui --app-protocol http --dapr-http-port 3500 -- npm run start",
+    "start:dapr": "dapr run --app-port 3000 --app-id task-tracker-web-ui --app-protocol http --dapr-http-port 3501 -- npm run start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
