@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddProblemDetails();
 
+/*
 var corsPolicy = "CORS";
 builder.Services.AddCors(options =>
 {
@@ -16,6 +17,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowCredentials());
 });
+*/
 
 builder.Services.AddTransient<ITaskCatalog, TaskCatalog>();
 builder.Services.AddEndpointsApiExplorer();
@@ -43,6 +45,8 @@ app.UseStatusCodePages();
 app.MapGet("/", () => TypedResults.Ok());
 
 app.MapCarter();
+/*
 app.UseCors(corsPolicy);
+*/
 
 app.Run();
