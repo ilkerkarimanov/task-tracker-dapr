@@ -6,19 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddProblemDetails();
 
-/*
-var corsPolicy = "CORS";
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(corsPolicy,
-        builder => builder
-            .SetIsOriginAllowed((host) => true)
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
-});
-*/
-
 builder.Services.AddTransient<ITaskCatalog, TaskCatalog>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -45,8 +32,6 @@ app.UseStatusCodePages();
 app.MapGet("/", () => TypedResults.Ok());
 
 app.MapCarter();
-/*
-app.UseCors(corsPolicy);
-*/
+
 
 app.Run();
